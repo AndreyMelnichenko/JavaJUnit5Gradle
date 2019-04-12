@@ -1,14 +1,26 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'io.qameta.allure' version '2.5'
 }
 
 group 'com.java'
 version '1.0-SNAPSHOT'
 
+allure {
+    autoconfigure = true
+    version = '2.7.0'  // Latest Allure Version
+
+    useJUnit5 {
+        version = '2.7.0' // Latest Allure Version
+    }
+
+}
+
 sourceCompatibility = 1.8
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -19,6 +31,7 @@ task runTest(type: JavaExec, dependsOn: test){
 
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.4.2')
 }
 
 test {
