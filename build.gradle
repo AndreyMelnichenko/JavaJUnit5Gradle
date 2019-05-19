@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'io.qameta.allure' version '2.5'
+    id 'io.qameta.allure' version '2.7.0'
 }
 
 group 'com.java'
@@ -32,6 +32,11 @@ task runTest(type: JavaExec, dependsOn: test){
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+    compile 'io.rest-assured:rest-assured:3.0.7'
+    compile 'com.fasterxml.jackson.ApiCore:jackson-ApiCore:2.9.8'
+    compile 'com.fasterxml.jackson.ApiCore:jackson-databind:2.9.8'
+    compile 'org.projectlombok:lombok:1.16.20'
+    
 }
 
 test {
