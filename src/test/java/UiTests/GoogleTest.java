@@ -1,0 +1,27 @@
+package UiTests;
+
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.open;
+
+public class GoogleTest {
+
+    @Test
+    public void userCanSearch() {
+        open("https://google.com/ncr");
+        new GooglePage().searchFor("selenide");
+
+        SearchResultsPage results = new SearchResultsPage();
+        results.getResults().shouldHave(sizeGreaterThan(1));
+        results.getResult(0).shouldHave(text("Selenide: concise UI tests in Java"));
+    }
+
+    @Test
+    public void emptyPageTest(){
+        open("about:blank");
+        Selenide.sleep(5000);
+    }
+}
