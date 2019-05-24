@@ -13,6 +13,7 @@ public class ApiTestBase {
     protected ObjectMapper objectMapper = new ObjectMapper();
     protected static String baseURL = "https://a0f6ce18-9c13-4b65-acb0-71583e8d88b9.mock.pstmn.io/testurl.com";
 
+
     @BeforeAll
     public static void setUp(){
 
