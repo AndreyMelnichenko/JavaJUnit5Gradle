@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'io.qameta.allure' version '2.7.0'
+    id 'io.qameta.allure'
 }
 
 group 'com.tablohub'
@@ -10,13 +10,8 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 allure {
+    version = '2.2.1'
     autoconfigure = true
-    aspectjweaver = true
-    version = '2.7.0'
-
-    useJUnit5 {
-        version = '2.7.0'
-    }
 }
 
 repositories {
@@ -24,7 +19,7 @@ repositories {
     jcenter()
 }
 
-ext{
+ext {
     lombokVersion = '1.18.8'
     jacksonVersion = '2.9.8'
     junitVersion = '5.4.2'
@@ -34,24 +29,19 @@ ext{
 }
 
 dependencies {
-    dependencies {
-        implementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
-        compile("org.junit.jupiter:junit-jupiter:${junitVersion}")
-        implementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-        compile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-        compile("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-        implementation "com.codeborne:selenide:${selenideVersion}"
-        compile "com.codeborne:selenide:${selenideVersion}"
+    implementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
+    implementation("com.codeborne:selenide:${selenideVersion}")
 
-        compile "io.rest-assured:rest-assured:${restAssuredVersion}"
-        compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-        compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
-        compile "org.projectlombok:lombok:${lombokVersion}"
-        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-        testImplementation group: 'org.slf4j', name: 'jul-to-slf4j', version:'1.7.25'
-        testImplementation group: 'ch.qos.logback', name: 'logback-classic', version:'1.2.3'
-    }
+    classpath "io.qameta.allure:allure-gradle:2.3"
+
+    compile "io.rest-assured:rest-assured:${restAssuredVersion}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    compile "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.25'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 }
 
 test {
