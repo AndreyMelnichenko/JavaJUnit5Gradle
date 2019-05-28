@@ -4,14 +4,10 @@ plugins {
     id 'io.qameta.allure' version '2.7.0'
 }
 
-group 'com.java'
+group 'com.tablohub'
 version '1.0-SNAPSHOT'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+sourceCompatibility = 1.8
 
 allure {
     autoconfigure = true
@@ -23,44 +19,46 @@ allure {
     }
 }
 
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
     jcenter()
 }
-
-task runTest(type: JavaExec, dependsOn: test){
-    main = 'helloGradle'
-    classpath sourceSets.main.runtimeClasspath
-}
-
-check.dependsOn test
 
 ext{
     lombokVersion = '1.18.8'
     jacksonVersion = '2.9.8'
     junitVersion = '5.4.2'
     restAssuredVersion = '3.0.7'
-    selenideVersion = '5.2.3'
+    selenideVersion = '5.2.1'
+    loggingVersion = '2.6.2'
 }
 
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
-    compile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-    compile "io.rest-assured:rest-assured:${restAssuredVersion}"
-    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    testCompile "com.codeborne:selenide:${selenideVersion}"
+    dependencies {
+        implementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
+        compile("org.junit.jupiter:junit-jupiter:${junitVersion}")
+        implementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+        compile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+        compile("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+        implementation "com.codeborne:selenide:${selenideVersion}"
+        compile "com.codeborne:selenide:${selenideVersion}"
+
+        compile "io.rest-assured:rest-assured:${restAssuredVersion}"
+        compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+        compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+        compile "org.projectlombok:lombok:${lombokVersion}"
+        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        testImplementation group: 'org.slf4j', name: 'jul-to-slf4j', version:'1.7.25'
+        testImplementation group: 'ch.qos.logback', name: 'logback-classic', version:'1.2.3'
+    }
 }
 
 test {
     useJUnitPlatform()
+    ignoreFailures = true
     testLogging {
         events "passed", "skipped", "failed"
     }
+    testLogging.showStandardStreams(true)
 }
