@@ -6,7 +6,10 @@ import core.TestListener;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 @ExtendWith(TestListener.class)
 public class MainPage {
@@ -14,6 +17,7 @@ public class MainPage {
     private SelenideElement footer = $("footer");
     private SelenideElement mailForm = $("body>.form");
     private SelenideElement forecastBar = $("div.sinoptik");
+    private List<SelenideElement> sectionsNameList = $$("section.feed__section>.feed__section--title");
 
     @Step("Check page logo")
     public MainPage isMainLogoPresent(){
@@ -38,6 +42,21 @@ public class MainPage {
     public MainPage isForecastBarDisplayed(){
         forecastBar.scrollIntoView(true).waitUntil(Condition.visible,5000);
         return this;
+    }
+
+    @Step("How many sections appeared")
+    public int getSectionsCount(){
+        return sectionsNameList.size();
+    }
+
+    @Step("Scroll to each section")
+    public void checkSections(){
+        sectionsNameList.forEach(a->a.waitUntil(Condition.visible,5000).scrollIntoView(true));
+    }
+
+    @Step("Is first section contain TEXT")
+    public void selenideAssertSectionRange(){
+        sectionsNameList.get(0).waitUntil(Condition.visible,5000).shouldHave(Condition.text("fail"));
     }
 
 }

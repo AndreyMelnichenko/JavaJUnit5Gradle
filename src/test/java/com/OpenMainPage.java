@@ -32,9 +32,24 @@ public class OpenMainPage extends WebDriverTestBase {
     }
 
     @Test
+    public void failSelenideAssertTest(){
+        MainPage mainPage = open("https://www.ukr.net/", MainPage.class);
+        mainPage.isMainLogoPresent()
+                .selenideAssertSectionRange();
+    }
+
+    @Test
     public void forecastTest(){
         MainPage mainPage = open("https://www.ukr.net/", MainPage.class);
         mainPage.isForecastBarDisplayed();
         assertEquals(1,3);
+    }
+
+    @Test
+    public void compareSectionsSize(){
+        MainPage mainPage = open("https://www.ukr.net/", MainPage.class);
+        mainPage.isForecastBarDisplayed()
+                .checkSections();
+
     }
 }

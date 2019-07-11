@@ -7,7 +7,12 @@ import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import static com.codeborne.selenide.Selenide.open;
+
+@ExtendWith(TestListener.class)
 public class WebDriverTestBase {
 
     @Step("Init Driver")
@@ -18,10 +23,10 @@ public class WebDriverTestBase {
 
     }
 
-//    @BeforeEach
-//    public void setupEachMethod(){
-//        open("about:blank");
-//    }
+    @BeforeEach
+    public void setupEachMethod(){
+        open("about:blank");
+    }
 
     @Step("Kill driver")
     @AfterAll
