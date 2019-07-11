@@ -3,12 +3,14 @@ package core;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 public class WebDriverTestBase {
 
+    @Step("Init Driver")
     @BeforeAll
     public static void setUp() {
             Configuration.browser = "chrome";
@@ -21,6 +23,7 @@ public class WebDriverTestBase {
 //        open("about:blank");
 //    }
 
+    @Step("Kill driver")
     @AfterAll
     public static void tearDown() {
         SelenideLogger.removeListener("allure");
