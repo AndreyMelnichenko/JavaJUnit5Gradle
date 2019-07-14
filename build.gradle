@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'io.qameta.allure' version '2.8.1'
+    id 'application'
 }
 
 group 'com.tablohub'
@@ -63,6 +64,13 @@ dependencies {
         compile group: 'org.json', name: 'json', version: '20180813'
         testCompile group: 'org.slf4j', name: 'slf4j-jdk14', version: slf4jVersion
     }
+}
+
+task execute(type:JavaExec) {
+    environment "one","2"
+    systemProperties System.properties
+    main = "helloGradle"
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 test {
