@@ -18,7 +18,9 @@ pipeline {
 
         stage('MAKING TEST RESULT') {
             steps {
-
+                script {
+                    sh 'pwd'
+                }
             }
         }
     }
