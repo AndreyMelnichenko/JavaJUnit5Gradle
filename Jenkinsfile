@@ -18,14 +18,7 @@ pipeline {
 
         stage('MAKING TEST RESULT') {
             steps {
-                script {"ls -la"}
-            }
-        }
-    }
-    post {
-        always {
-            cleanWs()
-            script{
+                script {
                 allure([
                     includeProperties: false,
                     jdk: '',
@@ -33,7 +26,13 @@ pipeline {
                     reportBuildPolicy: 'ALWAYS',
                     results: [[path: 'build/allure-results']]
                 ])
+                }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
