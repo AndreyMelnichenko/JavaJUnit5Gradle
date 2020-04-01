@@ -6,9 +6,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import io.qameta.allure.Step;
 
 public class PojoConverter {
 
+    @Step("Object to JSON")
     public static String convertPojoToPrettyJsonString(Object pojoObject) {
         ObjectMapper mapper = new ObjectMapper();
         String jsonInString = null;

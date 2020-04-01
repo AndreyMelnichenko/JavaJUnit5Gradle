@@ -4,11 +4,11 @@ public class helloGradle {
         ProcessBuilder processBuilder;
         //processBuilder.environment().get("one");
 
-        System.out.println(System.getProperty("four"));
+        System.out.println("My value: "+System.getProperty("four"));
 
-        System.getProperties().forEach((k, v) -> {
-            System.out.println(k + ":" + v);
-        });
+//        System.getProperties().forEach((k, v) -> {
+//            System.out.println(k + ":" + v);
+//        });
 
     }
 }

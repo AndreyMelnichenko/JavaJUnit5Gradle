@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,12 +17,11 @@ public class ApiTestBase {
 
     @BeforeAll
     public static void setUp(){
-
         spec = new RequestSpecBuilder()
                 .setBaseUri(baseURL)
                 .setContentType(ContentType.JSON)
                 .addFilter(new RequestLoggingFilter())
-                //.addFilter(new ResponseLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
                 .build();
     }
 
